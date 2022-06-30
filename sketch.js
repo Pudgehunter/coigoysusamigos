@@ -1,3 +1,6 @@
+var w = window.innerWidth;
+var h = window.innerHeight; 
+
 var level2 = [
   [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
@@ -12,9 +15,6 @@ var level2 = [
   [2, 2, 1, 1, 2, 8, 4, 1, 2, 2, 2, 2, 2, 2, 8, 8, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 0, 2],
   [2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 2],
   [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-
-
-
 ]
 
 var level1 = [
@@ -101,7 +101,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 600);
+  canvas = createCanvas(w,h);
 
 
   map1 = new Map(levels)
@@ -112,13 +112,17 @@ function setup() {
 
 }
 
+window.onresize = function() {
+  // assigns new values for width and height variables
+  w = window.innerWidth;
+  h = window.innerHeight;  
+  canvas.size(w,h);
+}
+
 function draw() {
   background(210, 255, 200);
   map1.draw()
   player.draw()
   player.update()
-
-
-
 
 }
