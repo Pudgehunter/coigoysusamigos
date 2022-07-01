@@ -16,9 +16,9 @@ class Player {
 
   }
 
-  updateMove(w, h) {
+  /*updateMove(w, h) {
     this.processInput(w, h);
-  }
+  }*/
 
   update(w, h) {
     // check if player is still alive?
@@ -33,7 +33,7 @@ class Player {
           this.lives--;
       }
 
-      if (mouseIsPressed || mouseDragged) {
+      if (mouseIsPressed) {
         this.processInput(w, h);
       }
 
