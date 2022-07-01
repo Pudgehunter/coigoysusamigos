@@ -92,23 +92,19 @@ var level4 = [
 var levels = [level1, level2, level3, level4];
 
 function preload() {
-
   player_image = loadImage("images/buho.png")
   player_injured_image = loadImage("images/buho.png")
   tiles_image = loadImage("images/tiles.png")
-
-
+  jump_image = loadImage("images/jump.png")
+  touchpad_image = loadImage("images/touchpad.png")
 }
 
 function setup() {
   canvas = createCanvas(w,h);
 
-
   map1 = new Map(levels)
   player = new Player()
-  //preload()
   player_injured_image.filter(THRESHOLD)
-
 
 }
 
@@ -121,8 +117,14 @@ window.onresize = function() {
 
 function draw() {
   background(210, 255, 200);
+  
   map1.draw()
+  //image(jump_image, h - (h/6), w - (w/10));
+  console.log(parseInt(h - (h/3)) + " and " + parseInt(w - (w/3))); 
   player.draw()
   player.update()
+  image(touchpad_image, parseInt(w/10), parseInt(h - (h/5)));
+  image(jump_image, parseInt(w - (w/5)), parseInt(h - (h/4)));
+  //image(jump_image, 200, 200);
 
 }
