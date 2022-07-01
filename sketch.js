@@ -142,6 +142,7 @@ function mouseClicked(){
   //console.log(mouseX,mouseY);
   //118sketch.js:123 414 and 896
   player.updateMove(w,h)
+  //360 a 600 y 740 a 1024
   if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
     mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
     console.log("touched left");
@@ -154,5 +155,6 @@ function mouseClicked(){
   mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142 ){ //mouseclicked
   console.log("touched jump");
   }
+  
   //console.log((w / 10),h - (h / 3));
 }
