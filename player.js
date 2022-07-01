@@ -1,7 +1,7 @@
 class Player {
 
- constructor() {
-    this.pos = createVector(200, map1.yoffset+5000);
+  constructor() {
+    this.pos = createVector(200, map1.yoffset + 5000);
     this.velocity = createVector(0, 0);
     this.gravity = 10;
     this.spriteSize = 96;
@@ -16,7 +16,11 @@ class Player {
 
   }
 
-  update() {
+  updateMove(w, h) {
+    this.processInput(w, h);
+  }
+
+  update(w, h) {
     // check if player is still alive?
     if (this.isAlive()) {
       // check to see if currently injured
@@ -29,15 +33,19 @@ class Player {
           this.lives--;
       }
 
+      if (mouseIsPressed) {
+        this.processInput(w, h);
+      }
+
       // check for item contact
-      this.touchingItem();    
-      
+      this.touchingItem();
+
       // update player Y movement based on velocity
       this.pos.add(this.velocity);
       this.updateVelocity();
       // check for Input to move or jump...
-      this.processInput();
-      
+
+
       this.updateOffsets()
 
       // update animation timer
@@ -51,55 +59,55 @@ class Player {
       // this.playSound(loseSound);
     }
   }
-  
-   updateOffsets(){
+
+  updateOffsets() {
     // l(this.pos.y - map1.yOffset);
-    if (this.pos.y- map1.yOffset < (height/5))
+    if (this.pos.y - map1.yOffset < (height / 5))
       map1.yOffset -= 5;
-    if(this.pos.y - map1.yOffset > (height-200))
+    if (this.pos.y - map1.yOffset > (height - 200))
       map1.yOffset += 10;
   }
 
 
-   collectItem(item) {
-      if (map1.itemList[item].type == "heart") {
-        // remove item from map
-        map1.blocks[map1.itemList[item].pos.y / 50][map1.itemList[item].pos.x / 50] = 0;
-        // increase heartcount & remove item from map's itemList
-        this.lives++;
-        map1.itemList.splice(item, 1);
-        // play collect heart sound
-     
-      } else if (map1.itemList[item].type == "key") {
-        // remove item from map
-        map1.blocks[map1.itemList[item].pos.y / 50][map1.itemList[item].pos.x / 50] = 0;
-        // increase keycount & remove item from map's itemList
-        this.keys++;
-        map1.itemList.splice(item, 1);
-        // play unlock door sound
-       
-      } else if (map1.itemList[item].type == "door") {
-        // switch to the next level!!!!!
-        if (this.keys > 0) {
-          if(map1.currentLevel < map1.levelList.length-1){
+  collectItem(item) {
+    if (map1.itemList[item].type == "heart") {
+      // remove item from map
+      map1.blocks[map1.itemList[item].pos.y / 50][map1.itemList[item].pos.x / 50] = 0;
+      // increase heartcount & remove item from map's itemList
+      this.lives++;
+      map1.itemList.splice(item, 1);
+      // play collect heart sound
+
+    } else if (map1.itemList[item].type == "key") {
+      // remove item from map
+      map1.blocks[map1.itemList[item].pos.y / 50][map1.itemList[item].pos.x / 50] = 0;
+      // increase keycount & remove item from map's itemList
+      this.keys++;
+      map1.itemList.splice(item, 1);
+      // play unlock door sound
+
+    } else if (map1.itemList[item].type == "door") {
+      // switch to the next level!!!!!
+      if (this.keys > 0) {
+        if (map1.currentLevel < map1.levelList.length - 1) {
           this.lives = 0;
           this.endingMessage = "Level Complete";
-          setTimeout(()=>{
+          setTimeout(() => {
             this.lives = 2;
             this.keys = 0;
             this.pos = createVector(100, 500);
             map1.changeLevel();
-          },1500);
-          } else{
+          }, 1500);
+        } else {
           this.lives = 0;
           this.endingMessage = "You Win! Game Over!";
           // this.playSound(winSound);
-          }
-          
         }
 
       }
+
     }
+  }
 
 
   isAlive() {
@@ -131,7 +139,7 @@ class Player {
         this.collectItem(i);
       }
     }
-  
+
   }
 
 
@@ -196,103 +204,141 @@ class Player {
 
   }
 
- 
-  
-  
-  
-    updateVelocity() {
-      // move player down if they are falling
-      if (this.isFalling()) {
-        this.pos.add(0, this.gravity);
-      }
 
-      if (this.isFalling() && this.onSolid() != "top")
-        this.velocity.mult(0.9);
-      else if (this.isFalling() && this.onSolid() == "top") {
-        this.velocity.y = 0;
-      } else
-        this.velocity.mult(0);
+
+
+
+  updateVelocity() {
+    // move player down if they are falling
+    if (this.isFalling()) {
+      this.pos.add(0, this.gravity);
     }
 
-    isFalling() {
-      // check if is in the air
-      if (this.onSolid() != "bottom") {
-        this.movingState = 1;
-        return true;
-      } else {
-        this.movingState = 0;
-        return false;
+    if (this.isFalling() && this.onSolid() != "top")
+      this.velocity.mult(0.9);
+    else if (this.isFalling() && this.onSolid() == "top") {
+      this.velocity.y = 0;
+    } else
+      this.velocity.mult(0);
+  }
+
+  isFalling() {
+    // check if is in the air
+    if (this.onSolid() != "bottom") {
+      this.movingState = 1;
+      return true;
+    } else {
+      this.movingState = 0;
+      return false;
+    }
+  }
+
+
+
+
+
+  processInput(w, h) {
+    /*if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+      if (this.getBlockType(-1, 0) != "Solid") {
+        if (this.pos.x < width / 4)
+          map1.offset -= 5;
+        else {
+          this.pos.x -= 5;
+        }
       }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }*/
+    if (h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+      mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74) { //mouseclicked
+      console.log("touched left");
+      if (this.getBlockType(-1, 0) != "Solid") {
+        if (this.pos.x < width / 4)
+          map1.offset -= 5;
+        else {
+          this.pos.x -= 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }
+    /*if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+      if (this.getBlockType(50, 0) != "Solid") {
+        if (this.pos.x < width / 2.3)
+          this.pos.x += 5;
+        else {
+          map1.offset += 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }*/
+    if (h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+      mouseX >= (w / 10) + (74 * 2) && mouseX < (w / 10) + (74 * 3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74) { //mouseclicked
+      console.log("touched right");
+      if (this.getBlockType(50, 0) != "Solid") {
+        if (this.pos.x < width / 2.3)
+          this.pos.x += 5;
+        else {
+          map1.offset += 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
     }
 
-
-
-
-
-  processInput() {
-      if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-        if (this.getBlockType(-1, 0) != "Solid") {
-          if (this.pos.x < width / 4)
-            map1.offset -= 5;
-          else {
-            this.pos.x -= 5;
-          }
-        }
-        // also update the movingState
-        if (this.animationTimer % 6 == 0)
-          this.movingState = 3;
-        else
-          this.movingState = 2;
-      }
-
-      if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-        if (this.getBlockType(50, 0) != "Solid") {
-          if (this.pos.x < width / 2.3)
-            this.pos.x += 5;
-          else {
-            map1.offset += 5;
-          }
-        }
-        // also update the movingState
-        if (this.animationTimer % 6 == 0)
-          this.movingState = 3;
-        else
-          this.movingState = 2;
-
+    /*if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+      if (!this.isFalling()) {
+        this.velocity.y = -33;
 
       }
+    }*/
 
-      if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
-        if (!this.isFalling()) {
-          this.velocity.y = -33;
-         
-        }
+    if (h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+      mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142) { //mouseclicked
+      console.log("touched jump");
+      if (!this.isFalling()) {
+        this.velocity.y = -33;
+
       }
+    }
 
     //  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-   //     l(this.movingState);
-        // this.lives++;
-   //   }
-    }
+    //     l(this.movingState);
+    // this.lives++;
+    //   }
+  }
 
 
 
   draw() {
-      // draw HUD for player stats
-      for (var i = 0; i < this.lives; i++) {
-        image(tiles_image, i * 25, 0, 50, 50, 64 * 11, 64 * 4, 64, 64)
-      }
-      if(this.keys > 0)
-        image(tiles_image, width - 50, 0, 50, 50, 64 * 10, 64 * 4, 64, 64)
-      else
-        image(tiles_image, width - 50, 0, 50, 50, 64 * 6, 64 * 4, 64, 64)
-
-      // draw player image
-      if (this.injured && this.injuryTimer % 10 == 0) {
-        image(player_injured_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 96 * this.movingState, 0, this.spriteSize, this.spriteSize);
-      } else {
-        image(player_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 96 * this.movingState, 0, this.spriteSize, this.spriteSize);
-      }
+    // draw HUD for player stats
+    for (var i = 0; i < this.lives; i++) {
+      image(tiles_image, i * 25, 0, 50, 50, 64 * 11, 64 * 4, 64, 64)
     }
+    if (this.keys > 0)
+      image(tiles_image, width - 50, 0, 50, 50, 64 * 10, 64 * 4, 64, 64)
+    else
+      image(tiles_image, width - 50, 0, 50, 50, 64 * 6, 64 * 4, 64, 64)
+
+    // draw player image
+    if (this.injured && this.injuryTimer % 10 == 0) {
+      image(player_injured_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 96 * this.movingState, 0, this.spriteSize, this.spriteSize);
+    } else {
+      image(player_image, this.pos.x, this.pos.y - map1.yOffset, this.size, this.size, 96 * this.movingState, 0, this.spriteSize, this.spriteSize);
+    }
+  }
 
 }

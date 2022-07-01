@@ -120,9 +120,9 @@ function draw() {
 
   map1.draw()
   //image(jump_image, h - (h/6), w - (w/10));
-  console.log(h + " and " + w);
+  //console.log(h + " and " + w);
   player.draw()
-  player.update()
+  player.update(w,h)
   if (h >= 280 && h < 360 && w >= 653 && w < 740) {
     image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)), 150, 50);
     image(jump_image, parseInt(w - (w / 4)), parseInt(h - (h / 2.5)), 75, 75);
@@ -136,5 +136,23 @@ function draw() {
     image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 5)));
     image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 4)));
   }
+}
 
+function mouseClicked(){
+  //console.log(mouseX,mouseY);
+  //118sketch.js:123 414 and 896
+  player.updateMove(w,h)
+  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+    mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+    console.log("touched left");
+  }
+  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+    mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+    console.log("touched right");
+  }
+  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+  mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142 ){ //mouseclicked
+  console.log("touched jump");
+  }
+  //console.log((w / 10),h - (h / 3));
 }
