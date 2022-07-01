@@ -107,7 +107,15 @@ function setup() {
   map1 = new Map(levels)
   player = new Player()
   player_injured_image.filter(THRESHOLD)
+  
 
+}
+
+function FullScreenSupportEnabled() {
+  return (document.fullscreenEnabled || 
+          document.webkitFullscreenEnabled || 
+          document.mozFullScreenEnabled ||
+          document.msFullscreenEnabled);
 }
 
 window.onresize = function () {
@@ -120,11 +128,13 @@ window.onresize = function () {
 function draw() {
   switch (pantalla) {
     case 0:
+      FullScreenSupportEnabled();
       imageMode(CENTER);
       background(204,189,134,20);
       image(instruction,width/2,height/2);
       break;
     case 1:
+      FullScreenSupportEnabled();
       background(210, 255, 200);
       imageMode(CORNER);
       map1.draw()
