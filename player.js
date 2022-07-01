@@ -56,6 +56,8 @@ class Player {
       textSize(44);
       fill("white");
       text(this.endingMessage, 200, 200);
+      alert("Regresemos al zoológico");
+      window.close();
       // this.playSound(loseSound);
     }
   }

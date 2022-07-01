@@ -90,6 +90,7 @@ var level4 = [
 ]
 
 var levels = [level1, level2, level3, level4];
+let pantalla = 0;
 
 function preload() {
   player_image = loadImage("images/suricato.png")
@@ -97,6 +98,7 @@ function preload() {
   tiles_image = loadImage("images/tiles.png")
   jump_image = loadImage("images/jump.png")
   touchpad_image = loadImage("images/touchpad.png")
+  instruction = loadImage("images/Frame 6.png")
 }
 
 function setup() {
@@ -116,33 +118,48 @@ window.onresize = function () {
 }
 
 function draw() {
-  background(210, 255, 200);
-
-  map1.draw()
-  //image(jump_image, h - (h/6), w - (w/10));
-  //console.log(h + " and " + w);
-  player.draw()
-  player.update(w,h)
-  if (h >= 280 && h < 360 && w >= 653 && w < 740) {
-    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)), 150, 50);
-    image(jump_image, parseInt(w - (w / 4)), parseInt(h - (h / 2.5)), 75, 75);
-  } else if (h >= 360 && h < 600 && w >= 740 && w < 1024) {
-    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)));
-    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 2)));
-  } else if (h >= 600 && h < 800 && w >= 1024 && w < 1280) {
-    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 4)));
-    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 3)));
-  }else {
-    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 5)));
-    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 4)));
+  switch (pantalla) {
+    case 0:
+      imageMode(CENTER);
+      background(204,189,134,20);
+      image(instruction,width/2,height/2);
+      break;
+    case 1:
+      background(210, 255, 200);
+      imageMode(CORNER);
+      map1.draw()
+      //image(jump_image, h - (h/6), w - (w/10));
+      //console.log(h + " and " + w);
+      player.draw()
+      player.update(w, h)
+      if (h >= 280 && h < 360 && w >= 653 && w < 740) {
+        image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)), 150, 50);
+        image(jump_image, parseInt(w - (w / 4)), parseInt(h - (h / 2.5)), 75, 75);
+      } else if (h >= 360 && h < 600 && w >= 740 && w < 1024) {
+        image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)));
+        image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 2)));
+      } else if (h >= 600 && h < 800 && w >= 1024 && w < 1280) {
+        image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 4)));
+        image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 3)));
+      } else {
+        image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 5)));
+        image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 4)));
+      }
+      break;
   }
 }
 
-function mouseClicked(){
+function mouseClicked() {
+  switch (pantalla) {
+    case 0:
+      pantalla ++;
+      break;
+    case 1:
+      break;
   //console.log(mouseX,mouseY);
   //118sketch.js:123 414 and 896
   //player.updateMove(w,h)
-   //280 a 360 y 653 a 740
+  //280 a 360 y 653 a 740
   /* if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
    mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
    console.log("touched left");
@@ -182,4 +199,5 @@ function mouseClicked(){
   console.log("touched jump");
   }*/
   //console.log((w / 10),h - (h / 3));
+  }
 }
