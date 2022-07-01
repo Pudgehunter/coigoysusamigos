@@ -33,7 +33,7 @@ class Player {
           this.lives--;
       }
 
-      if (mouseIsPressed || touchstarted) {
+      if (mouseIsPressed) {
         this.processInput(w, h);
       }
 

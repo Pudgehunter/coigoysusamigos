@@ -149,6 +149,10 @@ function draw() {
   }
 }
 
+function touchStarted() {
+  processInput(w,h);
+}
+
 function mouseClicked() {
   switch (pantalla) {
     case 0:
