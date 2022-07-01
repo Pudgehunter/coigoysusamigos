@@ -22,14 +22,14 @@ var level1 = [
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 2],
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 2],
-  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 2, 1, 0, 2],
-  [2, 4, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 2],
-  [2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 2],
-  [2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0, 8, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2],
-  [2, 2, 2, 2, 2, 2, 1, 10, 10, 1, 0, 0, 0, 0, 0, 1, 8, 8, 1, 6, 0, 3, 4, 1, 10, 10, 1, 8, 8, 8, 8, 2, 0, 7, 2],
-  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2],
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2],
+  [2, 4, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+  [2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2],
+  [2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 2],
+  [2, 2, 2, 2, 2, 2, 1, 1, 10, 1, 2, 2, 2, 2, 2, 2, 8, 8, 1, 6, 0, 3, 4, 1, 1, 10, 1, 8, 1, 1, 1, 1, 0, 7, 2],
+  [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
 
 ]
 
@@ -92,8 +92,8 @@ var level4 = [
 var levels = [level1, level2, level3, level4];
 
 function preload() {
-  player_image = loadImage("images/buho.png")
-  player_injured_image = loadImage("images/buho.png")
+  player_image = loadImage("images/suricato.png")
+  player_injured_image = loadImage("images/suricato.png")
   tiles_image = loadImage("images/tiles.png")
   jump_image = loadImage("images/jump.png")
   touchpad_image = loadImage("images/touchpad.png")
@@ -141,7 +141,20 @@ function draw() {
 function mouseClicked(){
   //console.log(mouseX,mouseY);
   //118sketch.js:123 414 and 896
-  player.updateMove(w,h)
+  //player.updateMove(w,h)
+   //280 a 360 y 653 a 740
+  /* if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+   mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+   console.log("touched left");
+ }
+ if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+   mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+   console.log("touched right");
+ }
+ if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+ mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2.5)) && mouseY < (h - (h / 2.5)) + 142 ){ //mouseclicked
+ console.log("touched jump");
+ }
   //360 a 600 y 740 a 1024
   if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
     mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
@@ -155,6 +168,18 @@ function mouseClicked(){
   mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142 ){ //mouseclicked
   console.log("touched jump");
   }
-  
+  //600 a 800 y 1024 a 1280
+  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+    mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
+    console.log("touched left");
+  }
+  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+    mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
+    console.log("touched right");
+  }
+  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+  mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 3)) && mouseY < (h - (h / 3)) + 142 ){ //mouseclicked
+  console.log("touched jump");
+  }*/
   //console.log((w / 10),h - (h / 3));
 }

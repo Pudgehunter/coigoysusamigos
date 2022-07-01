@@ -16,9 +16,9 @@ class Player {
 
   }
 
-  /*updateMove(w, h) {
+  updateMove(w, h) {
     this.processInput(w, h);
-  }*/
+  }
 
   update(w, h) {
     // check if player is still alive?
@@ -90,7 +90,11 @@ class Player {
       // switch to the next level!!!!!
       if (this.keys > 0) {
         if (map1.currentLevel < map1.levelList.length - 1) {
-          this.lives = 0;
+          window.open("https://www.google.com");
+
+          window.close();
+
+         /*this.lives = 0;
           this.endingMessage = "Level Complete";
           setTimeout(() => {
             this.lives = 2;
@@ -101,7 +105,7 @@ class Player {
         } else {
           this.lives = 0;
           this.endingMessage = "You Win! Game Over!";
-          // this.playSound(winSound);
+          // this.playSound(winSound);*/
         }
 
       }
@@ -252,6 +256,8 @@ class Player {
       else
         this.movingState = 2;
     }*/
+
+
     if (h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
       mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74) { //mouseclicked
       console.log("touched left");
@@ -319,6 +325,87 @@ class Player {
     //     l(this.movingState);
     // this.lives++;
     //   }
+    if (h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+      mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74) { //mouseclicked
+      console.log("touched left");
+      if (this.getBlockType(-1, 0) != "Solid") {
+        if (this.pos.x < width / 4)
+          map1.offset -= 5;
+        else {
+          this.pos.x -= 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }
+    if (h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+      mouseX >= (w / 10) + (74 * 2) && mouseX < (w / 10) + (74 * 3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74) { //mouseclicked
+      console.log("touched right");
+      if (this.getBlockType(50, 0) != "Solid") {
+        if (this.pos.x < width / 2.3)
+          this.pos.x += 5;
+        else {
+          map1.offset += 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }
+    if (h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+      mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2.5)) && mouseY < (h - (h / 2.5)) + 142) { //mouseclicked
+      console.log("touched jump");
+      if (!this.isFalling()) {
+        this.velocity.y = -33;
+
+      }
+    }
+    //600 a 800 y 1024 a 1280
+    if (h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+      mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74) { //mouseclicked
+      console.log("touched left");
+      if (this.getBlockType(-1, 0) != "Solid") {
+        if (this.pos.x < width / 4)
+          map1.offset -= 5;
+        else {
+          this.pos.x -= 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }
+    if (h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+      mouseX >= (w / 10) + (74 * 2) && mouseX < (w / 10) + (74 * 3) && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74) { //mouseclicked
+      console.log("touched right");
+      if (this.getBlockType(50, 0) != "Solid") {
+        if (this.pos.x < width / 2.3)
+          this.pos.x += 5;
+        else {
+          map1.offset += 5;
+        }
+      }
+      // also update the movingState
+      if (this.animationTimer % 6 == 0)
+        this.movingState = 3;
+      else
+        this.movingState = 2;
+    }
+    if (h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+      mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 3)) && mouseY < (h - (h / 3)) + 142) { //mouseclicked
+      console.log("touched jump");
+      if (!this.isFalling()) {
+        this.velocity.y = -33;
+
+      }
+    }
   }
 
 

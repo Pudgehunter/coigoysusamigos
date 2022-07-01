@@ -7,7 +7,7 @@ class Map {
     this.itemList = [];
     this.blocks = [];
     this.offset = 0;
-    this.yOffset = (this.levelList[this.currentLevel].length * 50) - height;
+    this.yOffset = (this.levelList[this.currentLevel].length * 50) - window.innerHeight;
     this.gameState = "playing";
     // load in all blocks from map data
     this.loadLevel();
@@ -18,7 +18,7 @@ class Map {
     this.enemyList = [];
     this.itemList = [];
     this.offset = 0;
-    this.yOffset = (this.levelList[this.currentLevel].length * 50) - height;
+    this.yOffset = (this.levelList[this.currentLevel].length * 50) - window.innerHeight;
     this.loadLevel();
     player.pos = createVector(100, map1.yOffset);
   }
