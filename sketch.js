@@ -150,7 +150,7 @@ function draw() {
 }
 
 function touchStarted() {
-  processInput(w,h);
+  player.processInput(w,h);
 }
 
 function mouseClicked() {
