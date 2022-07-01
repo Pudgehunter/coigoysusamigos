@@ -128,13 +128,11 @@ window.onresize = function () {
 function draw() {
   switch (pantalla) {
     case 0:
-      FullScreenSupportEnabled();
       imageMode(CENTER);
       background(204,189,134,20);
       image(instruction,width/2,height/2);
       break;
     case 1:
-      FullScreenSupportEnabled();
       background(210, 255, 200);
       imageMode(CORNER);
       map1.draw()
@@ -167,6 +165,7 @@ function mouseClicked() {
   switch (pantalla) {
     case 0:
       pantalla ++;
+      document.documentElement.requestFullscreen();
       break;
     case 1:
       break;
