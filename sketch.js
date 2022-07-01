@@ -1,5 +1,5 @@
 var w = window.innerWidth;
-var h = window.innerHeight; 
+var h = window.innerHeight;
 
 var level2 = [
   [1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -81,8 +81,8 @@ var level4 = [
   [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
   [2, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9, 0, 0, 0, 0, 9, 0, 0, 2],
   [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
-  
-    [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+
+  [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
   [2, 7, 9, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 8, 0, 6, 0, 2],
   [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2],
 
@@ -100,7 +100,7 @@ function preload() {
 }
 
 function setup() {
-  canvas = createCanvas(w,h);
+  canvas = createCanvas(w, h);
 
   map1 = new Map(levels)
   player = new Player()
@@ -108,23 +108,33 @@ function setup() {
 
 }
 
-window.onresize = function() {
+window.onresize = function () {
   // assigns new values for width and height variables
   w = window.innerWidth;
-  h = window.innerHeight;  
-  canvas.size(w,h);
+  h = window.innerHeight;
+  canvas.size(w, h);
 }
 
 function draw() {
   background(210, 255, 200);
-  
+
   map1.draw()
   //image(jump_image, h - (h/6), w - (w/10));
-  console.log(parseInt(h - (h/3)) + " and " + parseInt(w - (w/3))); 
+  console.log(h + " and " + w);
   player.draw()
   player.update()
-  image(touchpad_image, parseInt(w/10), parseInt(h - (h/5)));
-  image(jump_image, parseInt(w - (w/5)), parseInt(h - (h/4)));
-  //image(jump_image, 200, 200);
+  if (h >= 280 && h < 360 && w >= 653 && w < 740) {
+    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)), 150, 50);
+    image(jump_image, parseInt(w - (w / 4)), parseInt(h - (h / 2.5)), 75, 75);
+  } else if (h >= 360 && h < 600 && w >= 740 && w < 1024) {
+    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)));
+    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 2)));
+  } else if (h >= 600 && h < 800 && w >= 1024 && w < 1280) {
+    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 4)));
+    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 3)));
+  }else {
+    image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 5)));
+    image(jump_image, parseInt(w - (w / 5)), parseInt(h - (h / 4)));
+  }
 
 }
