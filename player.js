@@ -13,6 +13,7 @@ class Player {
     this.keys = 0;
     this.movingState = 0;
     this.endingMessage = "GAME OVER!";
+    this.gameOverPlayer = false;
 
   }
 
@@ -56,8 +57,12 @@ class Player {
       textSize(44);
       fill("white");
       text(this.endingMessage, 200, 200);
-      alert("Regresemos al zoológico");
-      window.close();
+      location.reload();
+      alert("Has perdido, vuelve a intentarlo recargando la página");
+      //window.open("http://localhost:{127.0.0.1:5500}/index.html", "_self");
+      //window.open("D:\Desktop\Coigoysusamigos\coigoysusamigos\gameover.html", "_self");
+      //window.open("http://localhost:{127.0.0.1:5500}/gameover.html", "_self");
+      //http://localhost:{your-port-num}/empty-example
       // this.playSound(loseSound);
     }
   }
@@ -93,21 +98,22 @@ class Player {
       if (this.keys > 0) {
         if (map1.currentLevel < map1.levelList.length - 1) {
           window.open("https://www.figma.com/proto/ho7KzYfi9CQhG4nho3nUkP/Mascotas-zoo?page-id=3%3A306&node-id=82%3A34&viewport=-520%2C-126%2C0.38&scaling=scale-down&starting-point-node-id=82%3A34");
+          alert("GANASTEE!! FELICITACIONES");
 
-          window.close();
+          //window.close();
 
-         /*this.lives = 0;
-          this.endingMessage = "Level Complete";
-          setTimeout(() => {
-            this.lives = 2;
-            this.keys = 0;
-            this.pos = createVector(100, 500);
-            map1.changeLevel();
-          }, 1500);
-        } else {
-          this.lives = 0;
-          this.endingMessage = "You Win! Game Over!";
-          // this.playSound(winSound);*/
+          /*this.lives = 0;
+           this.endingMessage = "Level Complete";
+           setTimeout(() => {
+             this.lives = 2;
+             this.keys = 0;
+             this.pos = createVector(100, 500);
+             map1.changeLevel();
+           }, 1500);
+         } else {
+           this.lives = 0;
+           this.endingMessage = "You Win! Game Over!";
+           // this.playSound(winSound);*/
         }
 
       }
@@ -240,7 +246,83 @@ class Player {
   }
 
 
+  processInputKeyboard(keyCode) {
+    if (keyIsDown(UP_ARROW)) {
+      if (!this.isFalling()) {
+        this.velocity.y = -33;
+      }
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      if (this.getBlockType(-1, 0) != "Solid") {
+        if (this.pos.x < width / 4)
+          map1.offset -= 5;
+        else {
+          this.pos.x -= 5;
+        }
+        if (this.animationTimer % 6 == 0) {
+          this.movingState = 3;
+        } else {
+          this.movingState = 2;
+        }
+      }
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+      if (this.getBlockType(50, 0) != "Solid") {
+        if (this.pos.x < width / 2.3)
+          this.pos.x += 5;
+        else {
+          map1.offset += 5;
+        }
+      }
+      if (this.animationTimer % 6 == 0) {
+        this.movingState = 3;
+      } else {
+        this.movingState = 2;
+      }
+    }
 
+    /*switch (keyCode) {
+      case UP_ARROW:
+        //console.log("JUMP");
+        if (!this.isFalling()) {
+          this.velocity.y = -33;
+        }
+        break;
+      case LEFT_ARROW:
+        //console.log("LEFT");
+        if (this.getBlockType(-1, 0) != "Solid") {
+          if (this.pos.x < width / 4)
+            map1.offset -= 5;
+          else {
+            this.pos.x -= 5;
+          }
+        }
+        // also update the movingState
+        if (this.animationTimer % 6 == 0){
+          this.movingState = 3;
+        }else {
+          this.movingState = 2;
+        }
+        break;
+      case RIGHT_ARROW:
+        //console.log("RIGHT");
+        if (this.getBlockType(50, 0) != "Solid") {
+          if (this.pos.x < width / 4)
+            this.pos.x += 5;
+          else {
+            map1.offset += 5;
+          }
+        }
+        // also update the movingState
+        if (this.animationTimer % 6 == 0){
+          this.movingState = 3;
+        } else{
+          this.movingState = 2;
+        }
+        break;
+    }*/
+
+  }
 
 
   processInput(w, h) {
@@ -310,7 +392,7 @@ class Player {
     /*if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
       if (!this.isFalling()) {
         this.velocity.y = -33;
-
+  
       }
     }*/
 
@@ -409,6 +491,8 @@ class Player {
       }
     }
   }
+
+
 
 
 

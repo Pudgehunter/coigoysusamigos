@@ -107,15 +107,15 @@ function setup() {
   map1 = new Map(levels)
   player = new Player()
   player_injured_image.filter(THRESHOLD)
-  
+
 
 }
 
 function FullScreenSupportEnabled() {
-  return (document.fullscreenEnabled || 
-          document.webkitFullscreenEnabled || 
-          document.mozFullScreenEnabled ||
-          document.msFullscreenEnabled);
+  return (document.fullscreenEnabled ||
+    document.webkitFullscreenEnabled ||
+    document.mozFullScreenEnabled ||
+    document.msFullscreenEnabled);
 }
 
 window.onresize = function () {
@@ -129,8 +129,8 @@ function draw() {
   switch (pantalla) {
     case 0:
       imageMode(CENTER);
-      background(204,189,134,20);
-      image(instruction,width/2,height/2);
+      background(204, 189, 134, 20);
+      image(instruction, width / 2, height / 2);
       break;
     case 1:
       background(210, 255, 200);
@@ -139,7 +139,17 @@ function draw() {
       //image(jump_image, h - (h/6), w - (w/10));
       //console.log(h + " and " + w);
       player.draw()
-      player.update(w, h)
+      player.update(w, h);
+
+      if (touches.length === 2) {
+        player.processInput(w,h);
+      }
+
+      if(keyIsPressed){
+        player.processInputKeyboard(keyCode);
+        console.log("funciono)");
+      }
+
       if (h >= 280 && h < 360 && w >= 653 && w < 740) {
         image(touchpad_image, parseInt(w / 10), parseInt(h - (h / 3)), 150, 50);
         image(jump_image, parseInt(w - (w / 4)), parseInt(h - (h / 2.5)), 75, 75);
@@ -158,59 +168,81 @@ function draw() {
 }
 
 function touchStarted() {
-  player.processInput(w,h);
+  player.processInput(w, h);
+}
+
+function keyPressed() {
+  //player.processInputKeyboard(keyCode);
+  /*switch (pantalla) {
+    case 1:
+      switch (keyCode) {
+        case UP_ARROW:
+          console.log("funciona");
+          break;
+        case DOWN_ARROW:
+          console.log("funciona");
+          break;
+        case LEFT_ARROW:
+          console.log("funciona");
+          break;
+        case RIGHT_ARROW:
+          console.log("funciona");
+          break;
+      }
+      break;
+  }*/
 }
 
 function mouseClicked() {
   switch (pantalla) {
     case 0:
-      pantalla ++;
+      pantalla++;
       document.documentElement.requestFullscreen();
       break;
     case 1:
       break;
-  //console.log(mouseX,mouseY);
-  //118sketch.js:123 414 and 896
-  //player.updateMove(w,h)
-  //280 a 360 y 653 a 740
-  /* if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
-   mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
-   console.log("touched left");
- }
- if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
-   mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
-   console.log("touched right");
- }
- if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
- mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2.5)) && mouseY < (h - (h / 2.5)) + 142 ){ //mouseclicked
- console.log("touched jump");
- }
-  //360 a 600 y 740 a 1024
-  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
-    mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
-    console.log("touched left");
-  }
-  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
-    mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
-    console.log("touched right");
-  }
-  if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
-  mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142 ){ //mouseclicked
-  console.log("touched jump");
-  }
-  //600 a 800 y 1024 a 1280
-  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
-    mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
-    console.log("touched left");
-  }
-  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
-    mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
-    console.log("touched right");
-  }
-  if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
-  mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 3)) && mouseY < (h - (h / 3)) + 142 ){ //mouseclicked
-  console.log("touched jump");
-  }*/
-  //console.log((w / 10),h - (h / 3));
+    //console.log(mouseX,mouseY);
+    //118sketch.js:123 414 and 896
+    //player.updateMove(w,h)
+    //280 a 360 y 653 a 740
+    /* if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+     mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+     console.log("touched left");
+   }
+   if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+     mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+     console.log("touched right");
+   }
+   if(h >= 280 && h < 360 && w >= 653 && w < 740 && //Dependiendo del tamaño del celular
+   mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2.5)) && mouseY < (h - (h / 2.5)) + 142 ){ //mouseclicked
+   console.log("touched jump");
+   }
+    //360 a 600 y 740 a 1024
+    if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+      mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+      console.log("touched left");
+    }
+    if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+      mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 3) && mouseY < h - (h / 3) + 74 ){ //mouseclicked
+      console.log("touched right");
+    }
+    if(h >= 360 && h < 600 && w >= 740 && w < 1024 && //Dependiendo del tamaño del celular
+    mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 2)) && mouseY < (h - (h / 2)) + 142 ){ //mouseclicked
+    console.log("touched jump");
+    }
+    //600 a 800 y 1024 a 1280
+    if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+      mouseX >= w / 10 && mouseX < w / 10 + 74 && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
+      console.log("touched left");
+    }
+    if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+      mouseX >= (w / 10) + (74*2) && mouseX < (w / 10) + (74*3) && mouseY >= h - (h / 4) && mouseY < h - (h / 4) + 74 ){ //mouseclicked
+      console.log("touched right");
+    }
+    if(h >= 600 && h < 800 && w >= 1024 && w < 1280 && //Dependiendo del tamaño del celular
+    mouseX >= (w - (w / 5)) && mouseX < (w - (w / 5)) + 142 && mouseY >= (h - (h / 3)) && mouseY < (h - (h / 3)) + 142 ){ //mouseclicked
+    console.log("touched jump");
+    }*/
+    //console.log((w / 10),h - (h / 3));
   }
 }
